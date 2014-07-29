@@ -1,0 +1,103 @@
+@import "../less/bootstrap";
+
+body{
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+body > header{
+  height: 110px;
+  background: #fff;
+
+  min-width: 1000px;
+
+  .pull-left, .pull-right{
+    height: inherit;
+  }
+
+  #description-wrapper{
+    line-height: 13px;
+    color: #666666;
+    font-size: 10.55px;
+    padding-left: 15px;
+    padding-right: 15px;
+    max-width: 120px;
+    padding-top: 40px;
+  }
+
+  #nav-wrapper{
+    margin-left: 20px;
+    li{
+      height: 90px;
+      border-radius: 0px;
+      padding-top: 0px;
+      padding-bottom: 0px;
+      margin-right: 1px;
+      &:hover, &.active{
+        a{
+          background: #ea1e2e;
+          color: #fff
+        }
+      }
+      a{
+        height: 90px;
+        color: #666666;
+        padding-top: 35px;
+      }
+    }
+  }
+
+  #search-wrapper{
+    width: 210px;
+    margin-left: 20px;
+
+    .search{
+      margin-top: 35px;
+      height: 42px;
+      border: 1px #d9d9d9 solid;
+      input{
+        width: 165px;
+        padding-left: 8px;
+        padding-right: 8px;
+      }
+      input, button{
+        border: none;
+        line-height: 38px;
+        float: left;
+      }
+      button{
+        background: url("../img/search.jpg");
+        color: transparent;
+        font-size: 0px;
+        width: 40px;
+      }
+    }
+  }
+
+}
+
+#sub-nav{
+  background: #404040;
+  height: 40px;
+
+  ul{
+    margin-left: 60px;
+    li{
+      padding-top: 0px;
+      padding-bottom: 0px;
+      margin-right: 1px;
+      a{
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 25px;
+        padding-right: 25px;
+        color: #fff;
+        font-weight: 800;
+        border-radius: 0px;
+        &:hover{
+          background: #ea1e2e;
+        }
+      }
+    }
+  }
+}
