@@ -89,18 +89,17 @@ function html5blank_header_scripts()
         wp_register_script('modernizr', get_template_directory_uri() . '/js/lib/modernizr-2.7.1.min.js', array(), '2.7.1'); // Modernizr
         wp_enqueue_script('modernizr'); // Enqueue it!
 
+        wp_register_script('bootstrapjs', get_template_directory_uri() . '/js/bootstrap.min.js', array('jquery'), '1.0.0'); // Conditional script(s)
+        wp_enqueue_script('bootstrapjs'); // Enqueue it!
+
         wp_register_script('html5blankscripts', get_template_directory_uri() . '/js/scripts.js', array('jquery'), '1.0.0'); // Custom scripts
         wp_enqueue_script('html5blankscripts'); // Enqueue it!
     }
 }
 
 // Load HTML5 Blank conditional scripts
-function html5blank_conditional_scripts()
-{
+function html5blank_conditional_scripts(){
     if (is_page('pagenamehere')) {
-        wp_register_script('bootstrapjs', get_template_directory_uri() . '/js/bootstrap.js', array('jquery'), '1.0.0'); // Conditional script(s)
-        wp_enqueue_script('bootstrapjs'); // Enqueue it!
-
         wp_register_script('scriptname', get_template_directory_uri() . '/js/scriptname.js', array('jquery'), '1.0.0'); // Conditional script(s)
         wp_enqueue_script('scriptname'); // Enqueue it!
     }
@@ -124,7 +123,7 @@ function register_html5_menu()
 {
     register_nav_menus(array( // Using array to specify more menus if needed
         'header-menu' => __('Header Menu', 'html5blank'), // Main Navigation
-        'sub-menu' => __('Sub Menu', 'html5blank'), // Sidebar Navigation
+        'sidebar-menu' => __('Sub Menu', 'html5blank'), // Sidebar Navigation
         //'extra-menu' => __('Extra Menu', 'html5blank') // Extra Navigation if needed (duplicate as many as you need!)
     ));
 }
@@ -151,16 +150,16 @@ function remove_category_rel_from_category_list($thelist)
 // Add page slug to body class, love this - Credit: Starkers Wordpress Theme
 function add_slug_to_body_class($classes)
 {
-    global $post;
+    global $posts;
     if (is_home()) {
         $key = array_search('blog', $classes);
         if ($key > -1) {
             unset($classes[$key]);
         }
     } elseif (is_page()) {
-        $classes[] = sanitize_html_class($post->post_name);
+        $classes[] = sanitize_html_class($posts->post_name);
     } elseif (is_singular()) {
-        $classes[] = sanitize_html_class($post->post_name);
+        $classes[] = sanitize_html_class($posts->post_name);
     }
 
     return $classes;
@@ -206,7 +205,7 @@ function html5wp_custom_post($length)
 // Create the Custom Excerpts callback
 function html5wp_excerpt($length_callback = '', $more_callback = '')
 {
-    global $post;
+    global $posts;
     if (function_exists($length_callback)) {
         add_filter('excerpt_length', $length_callback);
     }
@@ -223,8 +222,8 @@ function html5wp_excerpt($length_callback = '', $more_callback = '')
 // Custom View Article link to Post
 function html5_blank_view_article($more)
 {
-    global $post;
-    return '... <a class="view-article" href="' . get_permalink($post->ID) . '">' . __('View Article', 'html5blank') . '</a>';
+    global $posts;
+    return '... <a class="view-article" href="' . get_permalink($posts->ID) . '">' . __('View Article', 'html5blank') . '</a>';
 }
 
 // Remove Admin bar
@@ -306,7 +305,7 @@ add_filter('the_category', 'remove_category_rel_from_category_list'); // Remove 
 add_filter('the_excerpt', 'shortcode_unautop'); // Remove auto <p> tags in Excerpt (Manual Excerpts only)
 add_filter('the_excerpt', 'do_shortcode'); // Allows Shortcodes to be executed in Excerpt (Manual Excerpts only)
 add_filter('excerpt_more', 'html5_blank_view_article'); // Add 'View Article' button instead of [...] for Excerpts
-add_filter('show_admin_bar', 'remove_admin_bar'); // Remove Admin bar
+//add_filter('show_admin_bar', 'remove_admin_bar'); // Remove Admin bar
 add_filter('style_loader_tag', 'html5_style_remove'); // Remove 'text/css' from enqueued stylesheet
 add_filter('post_thumbnail_html', 'remove_thumbnail_dimensions', 10); // Remove width and height dynamic attributes to thumbnails
 add_filter('image_send_to_editor', 'remove_thumbnail_dimensions', 10); // Remove width and height dynamic attributes to post images
@@ -466,7 +465,7 @@ function html5_shortcode_demo_2($atts, $content = null) // Demo Heading H2 short
 
                 // If item has_children add atts to a.
                 if ( $args->has_children && $depth === 0 ) {
-                    $atts['href']   		= '#';
+                    $atts['href']   		= ! empty( $item->url ) ? $item->url : '';
                     $atts['data-toggle']	= 'dropdown';
                     $atts['class']			= 'dropdown-toggle';
                     $atts['aria-haspopup']	= 'true';

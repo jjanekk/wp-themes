@@ -1,11 +1,16 @@
 (function ($, root, undefined) {
 	
 	$(function () {
-		
-		'use strict';
-		
-		// DOM ready, take it away
+
+        $('.dropdown').hover(function() {
+            $(this).toggleClass('open');
+        });
+
+        $('.dropdown').click(function(){
+            window.location = $(this).children("a").attr('href');
+        })
 		
 	});
 	
 })(jQuery, this);
+

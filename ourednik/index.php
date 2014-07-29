@@ -1,3 +1,5 @@
 <?php get_header(); ?>
 
-asaasss
+    <?php get_template_part('template/index') ?>
+
+<?php get_footer() ?>

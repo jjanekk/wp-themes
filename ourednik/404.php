@@ -2,15 +2,14 @@
 
 	<main role="main">
 		<!-- section -->
-		<section>
+		<section style="min-height: 200px">
 
 			<!-- article -->
 			<article id="post-404">
 
-				<h1><?php _e( 'Page not found', 'html5blank' ); ?></h1>
-				<h2>
-					<a href="<?php echo home_url(); ?>"><?php _e( 'Return home?', 'html5blank' ); ?></a>
-				</h2>
+				<h1>Stránka nebyla nalezena</h1>
+
+                <p>Omlouváme se, ale Váš požadavek se u nás nenachází.</p>
 
 			</article>
 			<!-- /article -->
@@ -19,6 +18,5 @@
 		<!-- /section -->
 	</main>
 
-<?php get_sidebar(); ?>
 
 <?php get_footer(); ?>

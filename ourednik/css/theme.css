@@ -1,3 +1,4 @@
+@import "non-responsive.css";
 /*! normalize.css v3.0.1 | MIT License | git.io/normalize */
 html {
   font-family: sans-serif;
@@ -6166,11 +6167,15 @@ button.close {
 body {
   background-size: cover;
   background-repeat: no-repeat;
+  background-color: #fff;
+}
+.container {
+  min-width: 1000px !important;
 }
 body > header {
   height: 110px;
   background: #fff;
-  min-width: 1000px;
+  min-width: 1000px !important;
 }
 body > header .pull-left,
 body > header .pull-right {
@@ -6196,7 +6201,8 @@ body > header #nav-wrapper li {
   margin-right: 1px;
 }
 body > header #nav-wrapper li:hover a,
-body > header #nav-wrapper li.active a {
+body > header #nav-wrapper li.active a,
+body > header #nav-wrapper li.open a {
   background: #ea1e2e;
   color: #ffffff;
 }
@@ -6205,9 +6211,13 @@ body > header #nav-wrapper li a {
   color: #666666;
   padding-top: 35px;
 }
+body > header #nav-wrapper li ul li {
+  height: 30px;
+}
 body > header #search-wrapper {
   width: 210px;
   margin-left: 20px;
+  margin-right: 20px;
 }
 body > header #search-wrapper .search {
   margin-top: 35px;
@@ -6235,13 +6245,25 @@ body > header #search-wrapper .search button {
   background: #404040;
   height: 40px;
 }
-#sub-nav ul {
-  margin-left: 60px;
-}
 #sub-nav ul li {
   padding-top: 0px;
   padding-bottom: 0px;
   margin-right: 1px;
+}
+#sub-nav ul li:hover a,
+#sub-nav ul li.active a,
+#sub-nav ul li.open a {
+  background: #ea1e2e;
+}
+#sub-nav ul li:hover ul,
+#sub-nav ul li.active ul,
+#sub-nav ul li.open ul {
+  background: #ea1e2e;
+}
+#sub-nav ul li:hover ul li:hover a,
+#sub-nav ul li.active ul li:hover a,
+#sub-nav ul li.open ul li:hover a {
+  color: #f5e79e;
 }
 #sub-nav ul li a {
   padding-top: 10px;
@@ -6252,6 +6274,79 @@ body > header #search-wrapper .search button {
   font-weight: 800;
   border-radius: 0px;
 }
-#sub-nav ul li a:hover {
-  background: #ea1e2e;
+#page-content .container {
+  background: rgba(255, 255, 255, 0.8);
+  min-height: 50px;
+  max-width: 1150px !important;
+}
+#page-content .page-title {
+  text-align: center;
+  color: #ea1e2e;
+  font-size: 32px;
+  font-weight: 800;
+  background: url("../img/page-title.png") center center;
+  text-transform: uppercase;
+}
+.page-blog {
+  margin-bottom: 15px;
+}
+#products {
+  margin-top: 40px;
+  margin-left: 35px;
+}
+.product {
+  width: 230px;
+  height: 205px;
+  position: relative;
+  float: left;
+  margin-right: 25px;
+  margin-left: 10px;
+}
+.product:last-child {
+  margin-right: 0px !important;
+}
+.product:hover .product-title {
+  background: url("../img/red.png") repeat-x !important;
+}
+.product .triangle {
+  background: url("../img/triangle.png") no-repeat left top;
+  position: absolute;
+  left: -4px;
+  top: -4px;
+  z-index: 10;
+  width: 94px;
+  height: 90px;
+}
+.product .product-title {
+  position: absolute;
+  color: #fff;
+  background: url(../img/black.png) repeat-x;
+  height: 48px;
+  bottom: 15px;
+  left: 0px;
+  width: 225px;
+  padding-left: 10px;
+  text-transform: uppercase;
+  font-size: 20px;
+  font-weight: 800;
+  padding-top: 10px;
+}
+main {
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+#partners {
+  max-height: 220px;
+  overflow: hidden;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-bottom: 30px;
+}
+footer {
+  height: 75px;
+  background: #fff;
+  color: #9f9f9f;
+  padding-top: 25px;
+  border-top: 1px solid #9f9f9f;
+  margin-top: 0px;
 }
