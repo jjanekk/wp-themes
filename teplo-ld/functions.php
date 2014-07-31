@@ -35,7 +35,7 @@ if (function_exists('add_theme_support'))
     // Add Support for Custom Backgrounds - Uncomment below if you're going to use
     add_theme_support('custom-background', array(
 	'default-color' => 'FFF',
-	'default-image' => get_template_directory_uri() . '/img/bg.jpg'
+	//'default-image' => get_template_directory_uri() . '/img/bg.jpg'
     ));
 
     // Add Support for Custom Header - Uncomment below if you're going to use
@@ -92,6 +92,9 @@ function html5blank_header_scripts()
         wp_register_script('bootstrapjs', get_template_directory_uri() . '/js/bootstrap.min.js', array('jquery'), '1.0.0'); // Conditional script(s)
         wp_enqueue_script('bootstrapjs'); // Enqueue it!
 
+        wp_register_script('sliderjq', get_template_directory_uri() . '/js/jquery.bxslider.min.js', array('jquery'), '1.0.0'); // Conditional script(s)
+        wp_enqueue_script('sliderjq'); // Enqueue it!
+
         wp_register_script('html5blankscripts', get_template_directory_uri() . '/js/scripts.js', array('jquery'), '1.0.0'); // Custom scripts
         wp_enqueue_script('html5blankscripts'); // Enqueue it!
     }
@@ -123,7 +126,7 @@ function register_html5_menu()
 {
     register_nav_menus(array( // Using array to specify more menus if needed
         'header-menu' => __('Header Menu', 'html5blank'), // Main Navigation
-        'sub-menu' => __('Sub Menu', 'html5blank'), // Sidebar Navigation
+       // 'sub-menu' => __('Sub Menu', 'html5blank'), // Sidebar Navigation
         //'extra-menu' => __('Extra Menu', 'html5blank') // Extra Navigation if needed (duplicate as many as you need!)
     ));
 }
@@ -274,7 +277,7 @@ add_action('wp_print_scripts', 'html5blank_conditional_scripts'); // Add Conditi
 add_action('get_header', 'enable_threaded_comments'); // Enable Threaded Comments
 add_action('wp_enqueue_scripts', 'html5blank_styles'); // Add Theme Stylesheet
 add_action('init', 'register_html5_menu'); // Add HTML5 Blank Menu
-//add_action('init', 'create_post_type_html5'); // Add our HTML5 Blank Custom Post Type
+add_action('init', 'create_post_type_html5'); // Add our HTML5 Blank Custom Post Type
 add_action('widgets_init', 'my_remove_recent_comments_style'); // Remove inline Recent Comment Styles from wp_head()
 add_action('init', 'html5wp_pagination'); // Add our HTML5 Pagination
 
@@ -329,21 +332,14 @@ function create_post_type_html5()
 {
     register_taxonomy_for_object_type('category', 'html5-blank'); // Register Taxonomies for Category
     register_taxonomy_for_object_type('post_tag', 'html5-blank');
-    register_post_type('html5-blank', // Register Custom Post Type
+
+    register_post_type('produkty', // Register Custom Post Type
         array(
         'labels' => array(
-            'name' => __('HTML5 Blank Custom Post', 'html5blank'), // Rename these to suit
-            'singular_name' => __('HTML5 Blank Custom Post', 'html5blank'),
-            'add_new' => __('Add New', 'html5blank'),
-            'add_new_item' => __('Add New HTML5 Blank Custom Post', 'html5blank'),
-            'edit' => __('Edit', 'html5blank'),
-            'edit_item' => __('Edit HTML5 Blank Custom Post', 'html5blank'),
-            'new_item' => __('New HTML5 Blank Custom Post', 'html5blank'),
-            'view' => __('View HTML5 Blank Custom Post', 'html5blank'),
-            'view_item' => __('View HTML5 Blank Custom Post', 'html5blank'),
-            'search_items' => __('Search HTML5 Blank Custom Post', 'html5blank'),
-            'not_found' => __('No HTML5 Blank Custom Posts found', 'html5blank'),
-            'not_found_in_trash' => __('No HTML5 Blank Custom Posts found in Trash', 'html5blank')
+            'name' => __('Produkty', 'html5blank'), // Rename these to suit
+            'singular_name' => __('Produkt', 'html5blank'),
+            'add_new' => __('Přidat nový', 'html5blank'),
+            'edit' => __('Upravit', 'html5blank')
         ),
         'public' => true,
         'hierarchical' => true, // Allows your posts to behave like Hierarchy Pages
@@ -356,11 +352,61 @@ function create_post_type_html5()
         ), // Go to Dashboard Custom HTML5 Blank post for supports
         'can_export' => true, // Allows export in Tools > Export
         'taxonomies' => array(
-            'post_tag',
-            'category'
+           // 'post_tag',
+           // 'category'
         ) // Add Category and Post Tags support
     ));
+
+
+    register_post_type('reference', // Register Custom Post Type
+        array(
+            'labels' => array(
+                'name' => __('Reference', 'html5blank'), // Rename these to suit
+                'singular_name' => __('Reference', 'html5blank'),
+                'add_new' => __('Přidat novou', 'html5blank'),
+                'edit' => __('Upravit', 'html5blank')
+            ),
+            'public' => true,
+            'hierarchical' => true, // Allows your posts to behave like Hierarchy Pages
+            'has_archive' => true,
+            'supports' => array(
+                'title',
+                'editor',
+                'excerpt',
+                'thumbnail'
+            ), // Go to Dashboard Custom HTML5 Blank post for supports
+            'can_export' => true, // Allows export in Tools > Export
+            'taxonomies' => array(
+                // 'post_tag',
+                // 'category'
+            ) // Add Category and Post Tags support
+        ));
+
+    register_post_type('news', // Register Custom Post Type
+        array(
+            'labels' => array(
+                'name' => __('Novinky', 'html5blank'), // Rename these to suit
+                'singular_name' => __('Novinka', 'html5blank'),
+                'add_new' => __('Přidat novou', 'html5blank'),
+                'edit' => __('Upravit', 'html5blank')
+            ),
+            'public' => true,
+            'hierarchical' => true, // Allows your posts to behave like Hierarchy Pages
+            'has_archive' => true,
+            'supports' => array(
+                'title',
+                'editor',
+              //  'excerpt',
+              //  'thumbnail'
+            ), // Go to Dashboard Custom HTML5 Blank post for supports
+            'can_export' => true, // Allows export in Tools > Export
+            'taxonomies' => array(
+                // 'post_tag',
+                // 'category'
+            ) // Add Category and Post Tags support
+        ));
 }
+
 
 /*------------------------------------*\
 	ShortCode Functions
@@ -586,4 +632,30 @@ function html5_shortcode_demo_2($atts, $content = null) // Demo Heading H2 short
                 echo $fb_output;
             }
         }
+    }
+
+    function meta_box() {
+
+        add_meta_box(
+            'ref-city',
+            'Město',
+            'renderBox',
+            'reference',
+            'normal', // add this line
+            'high'
+        );
+    }
+
+    add_action( 'add_meta_boxes', 'meta_box' );
+
+    function renderBox(){
+        global $post;
+        $p = get_post_meta($post->ID, 'city', true);
+        echo "<input name='city' value='$p' placeholder='Místo zakázky' />";
+    }
+
+    add_action('save_post', 'save_city');
+    function save_city(){
+        global $post;
+        update_post_meta($post->ID, "city", $_POST["city"]);
     }

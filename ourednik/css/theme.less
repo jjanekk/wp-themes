@@ -199,10 +199,26 @@ body > header{
 main{
   margin-bottom: 20px;
   margin-top: 20px;
+  section{
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 16px;
+    line-height: 20px;
+
+    h1{
+      font-size: 40px;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: #d43f3a;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #d43f3a;
+      margin-bottom: 20px;
+    }
+  }
 }
 
 #partners{
-  max-height: 220px;
+  max-height: 230px;
   overflow: hidden;
   padding-left: 15px;
   padding-right: 15px;
@@ -227,4 +243,39 @@ footer{
 
 #search-page{
   min-height: 500px;
+}
+
+#logo-slider{
+  img{
+    margin-right: 65px;
+    margin-top: 10px;
+    &:last-child{
+      margin-right: 0px;
+    }
+  }
+}
+
+
+@media (min-width: 992px){
+  main{
+    min-height: 600px;
+  }
+}
+
+#mapa{
+  position: relative;
+  iframe{
+    position: absolute;
+  }
+
+  #mapa-text{
+    position: absolute;
+    z-index: 100;
+    width: 320px;
+    background: #fff;
+    left: 10px;
+    top: 120px;
+    border: 1px solid #9f9f9f;
+    padding: 10px;
+  }
 }
